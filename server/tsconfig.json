@@ -1,12 +1,14 @@
 {
   "compilerOptions": {
     "target": "ES2020",
-    "module": "CommonJS",
-    "moduleResolution": "node",
+    "module": "Node16",
+    "moduleResolution": "node16",
     "rootDir": "src",
     "outDir": "dist",
     "esModuleInterop": true,
     "strict": true,
-    "verbatimModuleSyntax": false
-  }
+    "skipLibCheck": true
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "prisma", "prisma.config.ts"]
 }
