@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { login, register } from "../../api";
+import { getMe } from "../../api";
 
 /* ================= TYPES ================= */
 
@@ -44,6 +45,19 @@ const initialState: AuthState = {
 };
 
 /* ================= THUNKS ================= */
+
+export const loadMe = createAsyncThunk<
+User,
+string,
+{rejectValue: string}
+>("auth/loadMe", async (token, { rejectWithValue }) => {
+    try{
+      const user = await getMe(token);
+      return user;
+    } catch {
+      return rejectWithValue("Session expired");
+    }
+});
 
 export const registerUser = createAsyncThunk<
   User,

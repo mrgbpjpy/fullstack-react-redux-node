@@ -20,6 +20,22 @@ export async function register(data: {
 
 }
 
+
+export async function getMe(token: string) {
+    const res = await fetch(`${API}/api/users/me`,{
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    });
+
+    if (!res.ok){
+        throw new Error("Unauthorized");
+    }
+
+    return res.json();
+}
+
+
 export async function login(data: {
     email: string;
     password: string;
