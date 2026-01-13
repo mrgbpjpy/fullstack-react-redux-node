@@ -46,6 +46,29 @@ For local development, you must have PostgreSQL installed and running:
 ```env
 DATABASE_URL="postgresql://user:password@localhost:5432/fullstack_app"
 
+
+Run migrations:
+
+npx prisma migrate dev
+
+Production / Cloud
+
+In production, you can swap the connection string to any hosted PostgreSQL provider:
+
+Supabase
+
+Neon
+
+Railway
+
+Render
+
+AWS RDS
+
+No code changes needed — only the DATABASE_URL.
+
+it’s local by default, but **not locked to local**
+
 ------------------------------------------------------------------------
 
 ### Features
