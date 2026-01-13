@@ -24,7 +24,14 @@ export default function Register() {
   }
 
   return (
-    <div style={{ maxWidth: 400, margin: "40px auto" }}>
+    <div style={{
+        maxWidth: 400,
+        margin: "40px auto",
+        background: "white",
+        padding: 24,
+        borderRadius: 8,
+        boxShadow: "0 10px 20px rgba(0,0,0,0.05)",
+      }}>
       <h2>Register</h2>
 
       <input 
@@ -49,7 +56,17 @@ export default function Register() {
         style={{ width: "100%", marginBottom: 10 }}
         />
         
-      <button disabled={loading} onClick={handleRegister}>
+      <button style={{
+          width: "100%",
+          padding: 12,
+          background: "#2563eb",
+          color: "white",
+          border: "none",
+          borderRadius: 4,
+          cursor: "pointer",
+        }}
+        disabled={loading} 
+        onClick={handleRegister}>
         {loading ? "Registering..." : "Register"}
       </button>
 
