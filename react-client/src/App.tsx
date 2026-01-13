@@ -1,15 +1,33 @@
-import { useAppSelector } from "./hooks";
+import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Dashboard from "./pages/Dashboard";
+import { ProtectedRoute } from "./routes/ProtectedRoute";
 
 function App() {
-  const auth = useAppSelector((state) => state.auth);
+  return (
+    <BrowserRouter>
+      <nav style={{ display: "flex", gap: 10 }}>
+        <Link to="/login">Login</Link>
+        <Link to="/register">Register</Link>
+        <Link to="/dashboard">Dashboard</Link>
+      </nav>
 
-  return(
-    <>
-      <h1>Auth Debug</h1>
-      <pre>{JSON.stringify(auth,null,2)}</pre>
-    </>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="*" element={<Login />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
 export default App;
-
