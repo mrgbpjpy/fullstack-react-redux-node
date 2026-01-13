@@ -33,10 +33,12 @@ type AuthState = {
 };
 
 /* ================= STATE ================= */
+const savedToken = localStorage.getItem("token");
+const savedUser = localStorage.getItem("user");
 
 const initialState: AuthState = {
-  user: null,
-  token: null,
+  user: savedUser ? JSON.parse(savedUser) : null,
+  token: savedToken,
   loading: false,
   error: null,
 };
@@ -86,6 +88,9 @@ const authSlice = createSlice({
       state.token = null;
       state.error = null;
       state.loading = false;
+
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
     },
   },
   extraReducers: (builder) => {
@@ -114,6 +119,10 @@ const authSlice = createSlice({
         state.loading = false;
         state.token = action.payload.token;
         state.user = action.payload.user;
+
+        localStorage.setItem("token",action.payload.token);
+        localStorage.setItem("user", JSON.stringify(action.payload.user));
+
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
