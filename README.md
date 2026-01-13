@@ -31,8 +31,24 @@ JWT, protected routes, Redux state management, and session rehydration.
 -   Middleware-protected routes
 
 ------------------------------------------------------------------------
+## Database Setup
 
-## Features
+This project uses PostgreSQL.
+
+### Local Development
+
+For local development, you must have PostgreSQL installed and running:
+
+- Install PostgreSQL from: https://www.postgresql.org/download/
+- Create a database (example: `fullstack_app`)
+- Set your `.env` file:
+
+```env
+DATABASE_URL="postgresql://user:password@localhost:5432/fullstack_app"
+
+------------------------------------------------------------------------
+
+### Features
 
 -   Register new users
 -   Login with JWT
