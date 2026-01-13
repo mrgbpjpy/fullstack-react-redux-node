@@ -19,18 +19,28 @@ export default function Login() {
     },[token, navigate]);
 
     const handleLogin = () => {
+      if (!email || !password) return;
         dispatch(loginUser({email, password }));
     }
 
     return (
-    <div style={{maxWidth: 400, margin: "40px auto" }}>
+   <div
+      style={{
+        maxWidth: 400,
+        margin: "40px auto",
+        background: "white",
+        padding: 24,
+        borderRadius: 8,
+        boxShadow: "0 10px 20px rgba(0,0,0,0.05)",
+      }}
+    >
       <h2>Login</h2>
 
       <input
         placeholder="Email"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
-        style={{ width: "100%", marginBottom: 10 }}
+        style={{ width: "100%", padding: 10, marginBottom: 12 }}
       />
 
       <input
@@ -38,14 +48,26 @@ export default function Login() {
         placeholder="Password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
-        style={{ width: "100%", marginBottom: 10 }}
+        style={{ width: "100%", padding: 10, marginBottom: 12 }}
       />
 
-      <button disabled={loading} onClick={handleLogin}>
+      <button
+        disabled={loading}
+        onClick={handleLogin}
+        style={{
+          width: "100%",
+          padding: 12,
+          background: "#2563eb",
+          color: "white",
+          border: "none",
+          borderRadius: 4,
+          cursor: "pointer",
+        }}
+      >
         {loading ? "Logging in..." : "Login"}
       </button>
 
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {error && <p style={{ color: "red", marginTop: 10 }}>{error}</p>}
     </div>
   );
 }
