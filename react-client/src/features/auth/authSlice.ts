@@ -141,7 +141,23 @@ const authSlice = createSlice({
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload ?? "Login failed";
-      });
+      })
+
+      /*-------- LoadMe -------- */ 
+      .addCase(loadMe.pending, (state) =>{
+        state.loading = true;
+      })
+      .addCase(loadMe.fulfilled, (state, action) =>{
+        state.loading = false;
+        state.user = action.payload;
+      })
+      .addCase(loadMe.rejected, (state) => {
+        state.loading = false;
+        state.user = null;;
+        state.token = null;
+        localStorage.removeItem("token");
+        localStorage.removeItem("user");
+      })
   },
 });
 
