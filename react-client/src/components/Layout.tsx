@@ -1,6 +1,17 @@
 import {Link} from "react-router-dom";
+import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../hooks";
+import { loadMe } from "../features/auth/authSlice";
 
 export default function Layout({children}: {children: React.ReactNode}) {
+    const dispatch = useAppDispatch();
+    const token = useAppSelector((state) => state.auth.token);
+
+    useEffect(() => {
+        if (token) {
+            dispatch(loadMe(token));
+        }
+    },[token, dispatch])
     return(
         <div style={{ minHeight: "100vh", minWidth: "100vw", background: "#f5f7fb"}}>
         <nav
