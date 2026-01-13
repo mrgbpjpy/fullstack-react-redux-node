@@ -94,7 +94,7 @@ it’s local by default, but **not locked to local**
     │   │   ├── pages/
     │   │   ├── routes/
     │   │   ├── components/
-    │   │   └── store/
+    │   │   └── store
     │
     ├── server/
     │   ├── src/
