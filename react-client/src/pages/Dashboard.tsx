@@ -1,7 +1,6 @@
 import { useAppSelector,useAppDispatch } from "../hooks";
 import { logout } from "../features/auth/authSlice";
-
-
+import ThemeOrbCanvas from "../components/ThemeOrbCanvas";
 
 export default function Dashboard() {
     const {user} = useAppSelector((state)=> state.auth);
@@ -35,8 +34,17 @@ export default function Dashboard() {
 
     return(
         <div>
-            <h2>Dashboard</h2>
+            <h2 style={{ color: themeStyles.font2}}>Dashboard</h2>
             <p>Welcome {user?.name}</p>
+
+            <div style={{margin: "30px 0"}}>
+                <h3 style={{ color: themeStyles.font2}}>Theme Engine</h3>
+                <ThemeOrbCanvas/>
+                <p style={{ opacity: 0.7}}>
+                    Orb reflects your active theme in real time.
+                </p>
+            </div>
+
             <button style={{backgroundColor: themeStyles.button, color: themeStyles.font}} onClick={() => dispatch(logout())}>Logout</button>
         </div>
     )
