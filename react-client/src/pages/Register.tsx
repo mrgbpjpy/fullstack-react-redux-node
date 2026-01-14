@@ -26,21 +26,24 @@ export default function Register() {
             nav: "#111827",
             font: "white",
             font2: "black",
-            button: "#9e9e9e"
+            button: "#9e9e9e",
+            title: "#f5f7fb"
         },
         system: {
             bg: "#0f172a",
             nav: "#020617",
             font: "white",
              font2: "white",
-             button: "#2e457a"
+             button: "#2e457a",
+            title: "#84878f"
         },
         activity: {
             bg: "#fff7ed",
             nav: "#743574",
             font: "#e681d0",
              font2: "#b30f8f",
-             button: "#835e83"
+             button: "#835e83",
+            title: "#f5f7fb"
         }
     }[theme]
 
@@ -57,7 +60,7 @@ export default function Register() {
         borderRadius: 8,
         boxShadow: "0 10px 20px rgba(0,0,0,0.05)",
       }}>
-      <h2>Register</h2>
+      <h2 style={{backgroundColor: themeStyles.nav, color: themeStyles.font2}}>Register</h2>
 
       <input 
         placeholder="Name" 
