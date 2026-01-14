@@ -2,7 +2,7 @@ import {Link} from "react-router-dom";
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { loadMe } from "../features/auth/authSlice";
-import { setTheme, type ThemeMode } from "../features/theme/themeSlice";
+
 
 export default function Layout({children}: {children: React.ReactNode}) {
     const dispatch = useAppDispatch();
@@ -50,19 +50,10 @@ export default function Layout({children}: {children: React.ReactNode}) {
             <Link style={{ color: "white", textDecoration: "none"}} to="/dashboard">
                Dashboard
             </Link>
-            <div style={{ borderStyle:"groove", paddingLeft: 35, paddingRight: 35, paddingTop: 2,paddingBottom: 2, display: "flex", gap: 20  }}>
-            <strong>Theme:</strong>
-            <select
-                value={theme}
-                onChange={(e) => dispatch(setTheme(e.target.value as ThemeMode))}
-            >
-               
-                <option value="identity">Identity</option>
-                <option value="system">System</option>
-                <option value="activity">Activity</option>
-
-            </select>
-            </div>
+            <Link style={{ color: "white", textDecoration: "none"}} to="/settings">
+                Settings
+            </Link>
+            
         </nav>
         <main
             style={{

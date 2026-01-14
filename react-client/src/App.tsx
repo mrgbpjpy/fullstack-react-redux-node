@@ -4,6 +4,7 @@ import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import { ProtectedRoute } from "./routes/ProtectedRoute";
 import Layout from "./components/Layout";
+import Settings from "./pages/Settings";
 
 function App() {
   return (
@@ -18,6 +19,14 @@ function App() {
           element={
             <ProtectedRoute>
               <Dashboard />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/settings"
+          element={
+            <ProtectedRoute>
+              <Settings/>
             </ProtectedRoute>
           }
         />
