@@ -7,7 +7,8 @@ import { registerUser } from "../features/auth/authSlice";
 export default function Register() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-   const { loading, error, user } = useAppSelector((state) => state.auth);
+  const { loading, error, user } = useAppSelector((state) => state.auth);
+  const theme = useAppSelector((state) => state.theme.mode);
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -18,6 +19,30 @@ export default function Register() {
         navigate("/dashboard");
       }
   },[user, navigate])
+
+  const themeStyles = {
+        identity: {
+            bg: "#f5f7fb",
+            nav: "#111827",
+            font: "white",
+            font2: "black",
+            button: "#9e9e9e"
+        },
+        system: {
+            bg: "#0f172a",
+            nav: "#020617",
+            font: "white",
+             font2: "white",
+             button: "#2e457a"
+        },
+        activity: {
+            bg: "#fff7ed",
+            nav: "#743574",
+            font: "#e681d0",
+             font2: "#b30f8f",
+             button: "#835e83"
+        }
+    }[theme]
 
   const handleRegister = () => {
     dispatch(registerUser({name, email, password }));
@@ -59,8 +84,8 @@ export default function Register() {
       <button style={{
           width: "100%",
           padding: 12,
-          background: "#2563eb",
-          color: "white",
+          backgroundColor: themeStyles.button,
+          color: themeStyles.font,
           border: "none",
           borderRadius: 4,
           cursor: "pointer",
