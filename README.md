@@ -1,11 +1,9 @@
-# Full Stack Auth App
+# Full Stack Theme Engine App
 
-React + Redux Toolkit + Express + Prisma + PostgreSQL
+React + Redux Toolkit + Express + Prisma + PostgreSQL + R3F
 
-A full-stack authentication system built with a modern frontend and
-backend stack.\
-This project focuses on real-world authentication flow: register, login,
-JWT, protected routes, Redux state management, and session rehydration.
+A full-stack application combining real authentication, session persistence, activity tracking, and a visual theme engine.  
+This project goes beyond basic auth and into state-driven UI, theming, and visual feedback using React Three Fiber.
 
 ------------------------------------------------------------------------
 
@@ -13,103 +11,147 @@ JWT, protected routes, Redux state management, and session rehydration.
 
 ### Frontend (react-client)
 
--   React + TypeScript
--   Redux Toolkit
--   React Router
--   Async Thunks
--   JWT-based auth flow
--   LocalStorage session persistence
+- React + TypeScript  
+- Redux Toolkit  
+- React Router  
+- Async Thunks  
+- JWT-based auth flow  
+- LocalStorage session persistence  
+- Theme Engine (Redux-driven)  
+- React Three Fiber (Theme Orb)  
+- Activity feed UI  
 
 ### Backend (server)
 
--   Node.js + Express
--   TypeScript
--   Prisma ORM
--   PostgreSQL
--   JWT Authentication
--   bcrypt password hashing
--   Middleware-protected routes
+- Node.js + Express  
+- TypeScript  
+- Prisma ORM  
+- PostgreSQL  
+- JWT Authentication  
+- bcrypt password hashing  
+- Middleware-protected routes  
+- Activity logging system  
 
 ------------------------------------------------------------------------
+
 ## Database Setup
 
 This project uses PostgreSQL.
 
 ### Local Development
 
-For local development, you must have PostgreSQL installed and running:
+PostgreSQL must be installed locally by default:
 
-- Install PostgreSQL from: https://www.postgresql.org/download/
-- Create a database (example: `fullstack_app`)
+- Install PostgreSQL from: https://www.postgresql.org/download/  
+- Create a database (example: `fullstackdb`)  
 - Set your `.env` file:
 
 ```env
-DATABASE_URL="postgresql://user:password@localhost:5432/fullstack_app"
-
+DATABASE_URL="postgresql://user:password@localhost:5432/fullstackdb"
+```
 
 Run migrations:
 
+```bash
 npx prisma migrate dev
+npx prisma generate
+```
 
-Production / Cloud
+### Production / Cloud
 
-In production, you can swap the connection string to any hosted PostgreSQL provider:
+You can replace the connection string with any hosted PostgreSQL:
 
-Supabase
+- Supabase  
+- Neon  
+- Railway  
+- Render  
+- AWS RDS  
 
-Neon
-
-Railway
-
-Render
-
-AWS RDS
-
-No code changes needed — only the DATABASE_URL.
-
-it’s local by default, but **not locked to local**
+No code changes required — only the DATABASE_URL.  
+Local is default, but it is not locked to local.
 
 ------------------------------------------------------------------------
 
-### Features
+## Features
 
--   Register new users
--   Login with JWT
--   Password hashing with bcrypt
--   Protected routes (frontend + backend)
--   Redux auth slice with async thunks
--   Persist auth state with localStorage
--   Auto rehydrate session on refresh
--   `/api/users/me` to validate token on load
--   Logout clears session everywhere
+### Auth System
+
+- Register new users  
+- Login with JWT  
+- Password hashing with bcrypt  
+- Protected routes (frontend + backend)  
+- Redux auth slice with async thunks  
+- Persist auth state with localStorage  
+- Auto rehydrate session on refresh  
+- `/api/user/me` validates token on load  
+- Logout clears session everywhere  
+
+### Activity System
+
+- Logs user actions:
+  - Register
+  - Login  
+- Stored in PostgreSQL  
+- Protected `/api/activity` endpoint  
+- Redux activity slice  
+- Dashboard activity feed  
+
+### Theme Engine
+
+- Redux theme slice  
+- Theme modes:
+  - identity
+  - system
+  - activity  
+- Theme applied across:
+  - Login page  
+  - Register page  
+  - Dashboard  
+  - Buttons  
+  - Titles  
+- Theme persists across navigation  
+- Settings page to change theme  
+
+### Visual Engine
+
+- React Three Fiber widget  
+- Theme Orb / rotating geometry  
+- Color reacts to active theme  
+- Animated feedback on theme change  
+- Visual proof of state-driven UI  
 
 ------------------------------------------------------------------------
 
 ## Project Structure
 
-    root/
-    ├── react-client/
-    │   ├── src/
-    │   │   ├── features/auth/
-    │   │   ├── pages/
-    │   │   ├── routes/
-    │   │   ├── components/
-    │   │   └── store
-    │
-    ├── server/
-    │   ├── src/
-    │   │   ├── routes/
-    │   │   ├── middleware/
-    │   │   ├── config/
-    │   │   └── prisma/
+```
+root/
+├── react-client/
+│   ├── src/
+│   │   ├── features/
+│   │   │   ├── auth/
+│   │   │   ├── theme/
+│   │   │   ├── activity/
+│   │   ├── pages/
+│   │   ├── components/
+│   │   ├── routes/
+│   │   └── store
+│
+├── server/
+│   ├── src/
+│   │   ├── routes/
+│   │   ├── middleware/
+│   │   ├── config/
+│   │   └── prisma/
+```
 
 ------------------------------------------------------------------------
 
-### Getting Started
+## Getting Started
 
 ### Backend
 
-``` bash
+```bash
 cd server
 npm install
 npx prisma generate
@@ -119,14 +161,14 @@ npm run dev
 
 Create `.env`:
 
-``` env
+```env
 DATABASE_URL=postgres://...
 JWT_SECRET=your_secret
 ```
 
 ### Frontend
 
-``` bash
+```bash
 cd react-client
 npm install
 npm run dev
@@ -136,14 +178,34 @@ npm run dev
 
 ## Auth Flow
 
-1.  Register → hashed password stored
-2.  Login → JWT returned + saved
-3.  Redux stores token + user
-4.  On refresh:
-    -   token exists → `/api/users/me` called
-    -   if valid → user restored
-    -   if invalid → auto logout
-5.  Protected routes require auth
+1. Register → password hashed  
+2. Login → JWT returned + saved  
+3. Redux stores token + user  
+4. On refresh:
+   - token exists → `/api/user/me` called  
+   - valid → user restored  
+   - invalid → auto logout  
+5. Protected routes require auth  
+
+------------------------------------------------------------------------
+
+## Activity Flow
+
+1. User registers → activity logged  
+2. User logs in → activity logged  
+3. Dashboard loads → `/api/activity` fetched with JWT  
+4. Redux stores activity list  
+5. UI renders recent actions  
+
+------------------------------------------------------------------------
+
+## Theme Engine Flow
+
+1. Theme selected in Settings  
+2. Redux theme state updates  
+3. UI restyles instantly  
+4. Theme Orb color + animation updates  
+5. Visual confirms state change  
 
 ------------------------------------------------------------------------
 
@@ -151,25 +213,27 @@ npm run dev
 
 ### Frontend
 
--   Redux Toolkit async thunks simplify API flow
--   TypeScript forces correct state usage early
--   Auth UX feels "real" only after session rehydration
--   Routing + auth must be tightly integrated
--   Small selector mistakes can break entire flows
+- Redux Toolkit async thunks simplify API flow  
+- TypeScript catches state mistakes early  
+- Auth UX feels real only after rehydration  
+- State-driven theming scales well  
+- Visual feedback makes state meaningful  
+- Small selector mistakes break big features  
 
 ### Backend
 
--   JWT middleware is critical for security
--   Prisma requires strict schema consistency
--   Error handling must be explicit to avoid silent failures
--   Hashing + token creation order matters
--   Token validation endpoints are essential
+- JWT middleware is core to security  
+- Prisma requires strict schema discipline  
+- Activity logging must be transactional  
+- Error handling prevents silent failure  
+- Token validation endpoints are essential  
 
-### General
+### Full Stack
 
--   Full-stack debugging requires reading both sides
--   Logging is more important than guessing
--   Real auth systems are about *flow*, not just endpoints
+- Debugging means reading frontend and backend together  
+- Network tab is your best friend  
+- Logging beats guessing  
+- Real apps are about flow, not just endpoints  
 
 ------------------------------------------------------------------------
 
@@ -177,38 +241,38 @@ npm run dev
 
 ### React Client
 
--   Improve UI/UX styling
--   Add loading skeletons
--   Add toast notifications
--   Better form validation
--   Password visibility toggle
--   Remember-me checkbox
--   Profile page
--   Settings page
--   Role-based UI rendering
--   Add React Three Fiber visual feature for flair
+- Improve layout and spacing  
+- Add loading skeletons  
+- Toast notifications  
+- Better form validation  
+- Password visibility toggle  
+- Remember-me checkbox  
+- Profile page  
+- Settings persistence  
+- Role-based UI  
+- Expand R3F visuals  
 
 ### Server
 
--   Refresh tokens
--   Token blacklisting
--   Email verification
--   Password reset flow
--   Rate limiting
--   Input validation middleware
--   Role-based authorization
--   Audit logging
+- Refresh tokens  
+- Token rotation  
+- Email verification  
+- Password reset  
+- Rate limiting  
+- Input validation middleware  
+- Role-based authorization  
+- Expanded audit logging  
 
 ------------------------------------------------------------------------
 
 ## Long-Term Ideas
 
--   Multi-factor authentication
--   OAuth login (Google/GitHub)
--   Admin dashboard
--   Activity logs
--   User preferences
--   Dark/light mode persistence
+- MFA  
+- OAuth (Google/GitHub)  
+- Admin dashboard  
+- Full activity analytics  
+- User preferences  
+- Theme persistence in DB  
 
 ------------------------------------------------------------------------
 
@@ -216,19 +280,22 @@ npm run dev
 
 This project demonstrates:
 
--   Real authentication architecture
--   Redux + async API handling
--   JWT security flow
--   Full-stack integration
--   Type-safe development
--   Production-style auth patterns
+- Real authentication architecture  
+- Redux + async API handling  
+- JWT security flow  
+- Session rehydration  
+- Activity auditing  
+- State-driven theming  
+- Visual UI feedback  
+- Full-stack integration  
+- Type-safe development  
 
-This is not a tutorial app --- it's a foundation for real applications.
+This is not a tutorial app — it’s a growing production-style foundation.
 
 ------------------------------------------------------------------------
 
 ## Author
 
-Built by: **Erick Esquilin**\
-Purpose: Portfolio-grade full stack authentication system\
-Status: Actively improving and expanding
+Built by: Erick Esquilin  
+Purpose: Portfolio-grade full stack system  
+Status: Actively evolving
