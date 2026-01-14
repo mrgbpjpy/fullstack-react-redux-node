@@ -22,7 +22,7 @@ export async function register(data: {
 
 
 export async function getMe(token: string) {
-    const res = await fetch(`${API}/api/users/me`,{
+    const res = await fetch(`${API}/api/user/me`,{
         headers: {
             Authorization: `Bearer ${token}`,
         },
