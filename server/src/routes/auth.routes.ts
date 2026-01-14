@@ -34,6 +34,10 @@ router.post("/register", async (req, res) => {
 
     console.log("User created:", user.id);
 
+    await prisma.activity.create({
+      data: { userId: user.id, action: "Registered account"},
+    });
+
     res.status(201).json({
       id: user.id,
       email: user.email,
@@ -44,6 +48,8 @@ router.post("/register", async (req, res) => {
     res.status(500).json({ message: "Server error during registration" });
   }
 });
+
+
 
 router.post("/login", async (req, res) => {
   try {
@@ -61,6 +67,10 @@ router.post("/login", async (req, res) => {
       { expiresIn: "1h" }
     );
 
+    await prisma.activity.create({
+      data: { userId: user.id, action: "Logged in" },
+    });
+
     res.json({
   token,
   user: {
@@ -74,5 +84,7 @@ router.post("/login", async (req, res) => {
     res.status(500).json({ message: "Server error during login" });
   }
 });
+
+
 
 export default router;

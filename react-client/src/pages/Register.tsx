@@ -60,7 +60,7 @@ export default function Register() {
         borderRadius: 8,
         boxShadow: "0 10px 20px rgba(0,0,0,0.05)",
       }}>
-      <h2 style={{backgroundColor: themeStyles.nav, color: themeStyles.font2}}>Register</h2>
+      <h2 style={{backgroundColor: themeStyles.nav, color: themeStyles.font}}>Register</h2>
 
       <input 
         placeholder="Name" 

@@ -34,7 +34,7 @@ export default function Login() {
         },
         system: {
             bg: "#0f172a",
-            nav: "#020617",
+            nav: "#d8dbe7",
             font: "white",
              font2: "white",
              button: "#2e457a",
@@ -59,7 +59,7 @@ export default function Login() {
         borderRadius: 8,
         boxShadow: "0 10px 20px rgba(0,0,0,0.05)",
       }}>
-      <h2 style={{ backgroundColor: themeStyles.nav, color: themeStyles.font2}}>Login</h2>
+      <h2 style={{ backgroundColor: themeStyles.nav, color: themeStyles.font}}>Login</h2>
 
       <input
         placeholder="Email"

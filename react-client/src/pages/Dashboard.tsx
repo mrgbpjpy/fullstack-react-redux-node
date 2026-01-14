@@ -1,11 +1,18 @@
+import { useEffect } from "react";
 import { useAppSelector,useAppDispatch } from "../hooks";
+import { fetchActivity } from "../features/activity/activitySlice";
 import { logout } from "../features/auth/authSlice";
 import ThemeOrbCanvas from "../components/ThemeOrbCanvas";
 
 export default function Dashboard() {
     const {user} = useAppSelector((state)=> state.auth);
     const dispatch = useAppDispatch();
+    const {list, loading} = useAppSelector((state) => state.activity);
     const theme = useAppSelector((state) => state.theme.mode);
+
+    useEffect(() => {
+        dispatch(fetchActivity());
+    },[dispatch])
 
     const themeStyles = {
         identity: {
@@ -41,11 +48,24 @@ export default function Dashboard() {
                 <h3 style={{ color: themeStyles.font2}}>Theme Engine</h3>
                 <ThemeOrbCanvas/>
                 <p style={{ opacity: 0.7}}>
-                    Orb reflects your active theme in real time.
+                    Cube reflects your active theme in real time.
                 </p>
             </div>
 
             <button style={{backgroundColor: themeStyles.button, color: themeStyles.font}} onClick={() => dispatch(logout())}>Logout</button>
+             <h3>Recent Activity</h3>
+
+      {loading && <p>Loading activity...</p>}
+
+      {!loading && list.length === 0 && <p>No activity yet</p>}
+
+      <ul>
+        {list.map((a) => (
+          <li key={a.id}>
+            {a.action} — {new Date(a.createdAt).toLocaleString()}
+          </li>
+        ))}
+      </ul>
         </div>
     )
 }
