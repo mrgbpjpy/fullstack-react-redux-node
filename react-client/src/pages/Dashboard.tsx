@@ -48,7 +48,8 @@ export default function Dashboard() {
                 <h3 style={{ color: themeStyles.font2}}>Theme Engine</h3>
                 <ThemeOrbCanvas/>
                 <p style={{ opacity: 0.7}}>
-                    Cube reflects your active theme in real time.
+                    Cube reflects your active theme in real time. You may change them in Settings page.
+                    
                 </p>
             </div>
 

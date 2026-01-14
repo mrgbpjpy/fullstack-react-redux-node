@@ -31,11 +31,11 @@ export default function Register() {
         },
         system: {
             bg: "#0f172a",
-            nav: "#020617",
+            nav: "#d8dbe7",
             font: "white",
              font2: "white",
              button: "#2e457a",
-            title: "#84878f"
+            title: "#f5f7fb"
         },
         activity: {
             bg: "#fff7ed",
