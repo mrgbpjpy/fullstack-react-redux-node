@@ -19,14 +19,20 @@ export default function Layout({children}: {children: React.ReactNode}) {
         identity: {
             bg: "#f5f7fb",
             nav: "#111827",
+            font: "white",
+            font2: "black"
         },
         system: {
             bg: "#0f172a",
             nav: "#020617",
+            font: "white",
+             font2: "white"
         },
         activity: {
             bg: "#fff7ed",
-            nav: "#7c2d12",
+            nav: "#743574",
+            font: "#e681d0",
+             font2: "#b30f8f"
         }
     }[theme]
 
@@ -41,16 +47,16 @@ export default function Layout({children}: {children: React.ReactNode}) {
                 gap: 25,
             }}
         >
-            <Link style={{ color: "white", textDecoration: "none"}} to="/login">
+            <Link style={{ color: themeStyles.font, textDecoration: "none"}} to="/login">
                 Login
             </Link>
-            <Link style={{ color: "white", textDecoration: "none"}} to="/register">
+            <Link style={{ color: themeStyles.font, textDecoration: "none"}} to="/register">
                 Register
             </Link>
-            <Link style={{ color: "white", textDecoration: "none"}} to="/dashboard">
+            <Link style={{ color: themeStyles.font, textDecoration: "none"}} to="/dashboard">
                Dashboard
             </Link>
-            <Link style={{ color: "white", textDecoration: "none"}} to="/settings">
+            <Link style={{ color: themeStyles.font, textDecoration: "none"}} to="/settings">
                 Settings
             </Link>
             
@@ -60,6 +66,7 @@ export default function Layout({children}: {children: React.ReactNode}) {
                 maxWidth: 900,
                 margin: "40px auto",
                 padding: 20,
+                color: themeStyles.font2
             }}
         >
             
