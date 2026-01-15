@@ -3,6 +3,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { prisma } from "../config/db";
 
+
 const router = Router();
 
 router.post("/register", async (req, res) => {

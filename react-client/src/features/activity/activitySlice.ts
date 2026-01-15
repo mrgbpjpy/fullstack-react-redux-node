@@ -1,4 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+const BASE = import.meta.env.VITE_API_URL + "/api/";
+
 
 /* ================= TYPES ================= */
 
@@ -32,7 +34,7 @@ export const fetchActivity = createAsyncThunk<
   try {
     const token = localStorage.getItem("token");
 
-    const res = await fetch("http://localhost:5000/api/activity", {
+    const res = await fetch(`${BASE}activity`, {
       headers: {
         "Content-Type": "application/json",
         ...(token ? { Authorization: `Bearer ${token}` } : {}),

@@ -13,6 +13,8 @@ export default function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
+    
+
     useEffect(()=>{
         if(token) {
             navigate("/dashboard");
@@ -20,6 +22,9 @@ export default function Login() {
     },[token, navigate]);
 
     const handleLogin = () => {
+       
+        console.log("LOGIN BUTTON CLICKED");
+ 
         dispatch(loginUser({email, password }));
     }
 
@@ -87,6 +92,7 @@ export default function Login() {
         }} 
         disabled={loading} 
         onClick={handleLogin}>
+        
         {loading ? "Logging in..." : "Login"}
       </button>
 

@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { login, register } from "../../api";
 import { getMe } from "../../api";
+
+
 
 /* ================= TYPES ================= */
 
@@ -65,12 +66,22 @@ export const registerUser = createAsyncThunk<
   { rejectValue: string }
 >("auth/register", async (data, { rejectWithValue }) => {
   try {
-    const res = await register(data);
-    return res;
+    console.log("REGISTER THUNK FIRED", data);
+
+    const res = await fetch("https://fullstack-react-redux-api.vercel.app/api/auth/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+
+    console.log("REGISTER STATUS", res.status);
+
+    const json = await res.json();
+    console.log("REGISTER RESPONSE", json);
+
+    return json;
   } catch (err: unknown) {
-    if (err instanceof Error) {
-      return rejectWithValue(err.message);
-    }
+    console.error("REGISTER ERROR", err);
     return rejectWithValue("Registration failed");
   }
 });
@@ -81,12 +92,22 @@ export const loginUser = createAsyncThunk<
   { rejectValue: string }
 >("auth/login", async (data, { rejectWithValue }) => {
   try {
-    const res = await login(data);
-    return res;
+    console.log("LOGIN THUNK FIRED", data);
+
+    const res = await fetch("https://fullstack-react-redux-api.vercel.app/api/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data),
+    });
+
+    console.log("LOGIN STATUS", res.status);
+
+    const json = await res.json();
+    console.log("LOGIN RESPONSE", json);
+
+    return json;
   } catch (err: unknown) {
-    if (err instanceof Error) {
-      return rejectWithValue(err.message);
-    }
+    console.error("LOGIN ERROR", err);
     return rejectWithValue("Login failed");
   }
 });

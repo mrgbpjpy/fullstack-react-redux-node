@@ -1,15 +1,15 @@
-const BASE = "http://localhost:5000/api";
+const BASE = import.meta.env.VITE_API_URL + "/api";
 
 /* ================= HEADERS ================= */
 
-function buildHeaders(): HeadersInit {
+function buildHeaders(token?: string): HeadersInit {
   const headers: Record<string, string> = {
     "Content-Type": "application/json",
   };
 
-  const token = localStorage.getItem("token");
-  if (token) {
-    headers.Authorization = `Bearer ${token}`;
+  const authToken = token ?? localStorage.getItem("token");
+  if (authToken) {
+    headers.Authorization = `Bearer ${authToken}`;
   }
 
   return headers;
@@ -24,7 +24,7 @@ export async function register(data: {
 }) {
   const res = await fetch(`${BASE}/auth/register`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: buildHeaders(),
     body: JSON.stringify(data),
   });
 
@@ -38,17 +38,26 @@ export async function login(data: {
 }) {
   const res = await fetch(`${BASE}/auth/login`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: buildHeaders(),
     body: JSON.stringify(data),
+    
   });
 
-  if (!res.ok) throw new Error("Login failed");
+
+
+  if (!res.ok) {
+    const msg = await res.text();
+    throw new Error(msg || "Login failed");
+  }
+
+  console.log("API BASE =", import.meta.env.VITE_API_URL);
+
   return res.json();
 }
 
-export async function getMe() {
+export async function getMe(token: string) {
   const res = await fetch(`${BASE}/user/me`, {
-    headers: buildHeaders(),
+    headers: buildHeaders(token),
   });
 
   if (!res.ok) throw new Error("Unauthorized");
