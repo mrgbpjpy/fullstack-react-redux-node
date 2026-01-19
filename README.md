@@ -17,7 +17,7 @@ mirrors how modern SaaS systems are built.
 **Try it live --- hiring managers and engineers are encouraged to
 register and explore.**
 
--   🌐 Frontend: https://fullstack-react-redux-ui.vercel.app\
+-   🌐 Frontend: https://fullstack-react-redux-ui.vercel.app
 -   🔌 Backend API: https://fullstack-react-redux-api.vercel.app
 
 Create an account, log in, change themes, and see state reflected
