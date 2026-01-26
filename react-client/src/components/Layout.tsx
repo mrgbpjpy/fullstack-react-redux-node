@@ -59,6 +59,9 @@ export default function Layout({children}: {children: React.ReactNode}) {
             <Link style={{ color: themeStyles.font, textDecoration: "none"}} to="/settings">
                 Settings
             </Link>
+            <Link style={{ color: themeStyles.font, textDecoration: "none"}} to="/profile">
+                Profile
+            </Link>
             
         </nav>
         <main

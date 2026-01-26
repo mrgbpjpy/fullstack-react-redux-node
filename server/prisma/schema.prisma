@@ -14,13 +14,14 @@ datasource db {
 }
 
 model User {
-  id         String     @id @default(uuid())
-  email      String     @unique
-  password   String
-  name       String
-  role       String     @default("user")
-  createdAt  DateTime   @default(now())
-  activities Activity[] 
+  id            String         @id @default(uuid())
+  email         String         @unique
+  password      String
+  name          String
+  role          String         @default("user")
+  createdAt     DateTime       @default(now())
+  activities    Activity[]
+  refreshTokens RefreshToken[]
 }
 
 model Activity {
@@ -28,6 +29,19 @@ model Activity {
   userId    String
   action    String
   createdAt DateTime @default(now())
-
+  metadata  Json? 
   user User @relation(fields: [userId], references: [id])
+}
+
+model RefreshToken {
+  id        String    @id @default(uuid())
+  tokenHash String    @unique
+  userId    String
+  expiresAt DateTime
+  createdAt DateTime  @default(now())
+  revokedAt DateTime?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
 }

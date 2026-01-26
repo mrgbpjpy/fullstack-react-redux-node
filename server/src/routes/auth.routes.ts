@@ -2,7 +2,7 @@ import { Router } from "express";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { prisma } from "../config/db";
-
+import { logActivity, ActivityActions } from "../utils/activityLogger";
 
 const router = Router();
 
@@ -39,6 +39,16 @@ router.post("/register", async (req, res) => {
       data: { userId: user.id, action: "Registered account"},
     });
 
+       // ✅ Phase 1 Activity Logging (REGISTER)
+    await logActivity({
+      userId: user.id,
+      action: ActivityActions.REGISTER,
+      metadata: {
+        ip: req.ip,
+        userAgent: req.headers["user-agent"],
+      },
+    });
+
     res.status(201).json({
       id: user.id,
       email: user.email,
@@ -70,6 +80,15 @@ router.post("/login", async (req, res) => {
 
     await prisma.activity.create({
       data: { userId: user.id, action: "Logged in" },
+    });
+
+     await logActivity({
+      userId: user.id,
+      action: ActivityActions.LOGIN,
+      metadata: {
+        ip: req.ip,
+        userAgent: req.headers["user-agent"],
+      },
     });
 
     res.json({

@@ -1,4 +1,5 @@
 import express, { Request, Response } from "express";
+//import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 
 import authRoutes from "./routes/auth.routes";
@@ -36,9 +37,13 @@ app.use((req, res, next) => {
   next();
 });
 
+
+
 /* ---------- BODY PARSING ---------- */
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+//app.use(cookieParser());
 
 /* ---------- ROUTES ---------- */
 app.use("/api/auth", authRoutes);

@@ -7,11 +7,11 @@ import ThemeOrbCanvas from "../components/ThemeOrbCanvas";
 export default function Dashboard() {
     const {user} = useAppSelector((state)=> state.auth);
     const dispatch = useAppDispatch();
-    const {list, loading} = useAppSelector((state) => state.activity);
+    const { items, loading, error } = useAppSelector((state) => state.activity);
     const theme = useAppSelector((state) => state.theme.mode);
 
     useEffect(() => {
-        dispatch(fetchActivity());
+        dispatch(fetchActivity({ reset: true }));
     },[dispatch])
 
     const themeStyles = {
@@ -48,7 +48,7 @@ export default function Dashboard() {
                 <h3 style={{ color: themeStyles.font2}}>Theme Engine</h3>
                 <ThemeOrbCanvas/>
                 <p style={{ opacity: 0.7}}>
-                    Cube reflects your active theme in real time. You may change them in Settings page.
+                    Cube reflects your active theme in real time. You may change theme in the Settings page.
                     
                 </p>
             </div>
@@ -58,10 +58,12 @@ export default function Dashboard() {
 
       {loading && <p>Loading activity...</p>}
 
-      {!loading && list.length === 0 && <p>No activity yet</p>}
+      {!loading && error && <p style={{ color: "crimson" }}>{error}</p>}
+
+      {!loading && items.length === 0 && <p>No activity yet</p>}
 
       <ul>
-        {list.map((a) => (
+        {items.map((a) => (
           <li key={a.id}>
             {a.action} — {new Date(a.createdAt).toLocaleString()}
           </li>

@@ -5,6 +5,7 @@ import Dashboard from "./pages/Dashboard";
 import { ProtectedRoute } from "./routes/ProtectedRoute";
 import Layout from "./components/Layout";
 import Settings from "./pages/Settings";
+import Profile from "./pages/Profile";
 
 function App() {
   return (
@@ -23,14 +24,22 @@ function App() {
           }
         />
         <Route
-          path="/settings"
-          element={
-            <ProtectedRoute>
-              <Settings/>
-            </ProtectedRoute>
-          }
-        />
-        <Route path="*" element={<Login />} />
+           path="/settings"
+           element={
+             <ProtectedRoute>
+               <Settings/>
+             </ProtectedRoute>
+           }
+         />
+         <Route
+           path="/profile"
+           element={
+             <ProtectedRoute>
+               <Profile />
+             </ProtectedRoute>
+           }
+         />
+         <Route path="*" element={<Login />} />
       </Routes>
       </Layout>
     </BrowserRouter>

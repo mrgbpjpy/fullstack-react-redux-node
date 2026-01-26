@@ -1,7 +1,11 @@
 {
     "cSpell.words": [
+        "aaplication",
         "drei",
         "metalness",
-        "neondatabase"
-    ]
+        "neondatabase",
+        "vite"
+    ],
+    "csharp.semanticHighlighting.enabled": true,
+    "editor.semanticHighlighting.enabled": false
 }

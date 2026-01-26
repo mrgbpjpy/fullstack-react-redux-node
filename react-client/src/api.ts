@@ -64,6 +64,24 @@ export async function getMe(token: string) {
   return res.json();
 }
 
+export async function updateMe(
+  data: { name: string; email: string },
+  token: string
+) {
+  const res = await fetch(`${BASE}/user/me`, {
+    method: "PUT",
+    headers: buildHeaders(token),
+    body: JSON.stringify(data),
+  });
+
+  if (!res.ok) {
+    const msg = await res.text();
+    throw new Error(msg || "Update failed");
+  }
+
+  return res.json();
+}
+
 /* ================= ACTIVITY ================= */
 
 export async function getActivity() {
