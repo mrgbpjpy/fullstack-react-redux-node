@@ -210,7 +210,7 @@ to grow.
 
 ### Live Demo
 
--   Frontend: https://fullstack-react-redux-ui.vercel.app\
+-   Frontend: https://fullstack-react-redux-ui.vercel.app
 -   API: https://fullstack-react-redux-api.vercel.app
 
 **Hiring managers:**\
